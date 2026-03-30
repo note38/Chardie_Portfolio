@@ -1,0 +1,54 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+}
+
+model Blog {
+  id        String   @id @default(cuid())
+  title     String
+  excerpt   String
+  date      String
+  readTime  String
+  url       String?
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Skill {
+  id        String   @id @default(cuid())
+  name      String   @unique
+  order     Int      @default(0)
+  createdAt DateTime @default(now())
+}
+
+model Project {
+  id          String   @id @default(cuid())
+  title       String
+  description String
+  techStack   String
+  url         String?
+  githubUrl   String?
+  order       Int      @default(0)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
+
+model Profile {
+  id          String   @id @default(cuid())
+  email       String
+  github      String
+  linkedin    String
+  bio         String
+  name        String   @default("Gotis")
+  surname     String   @default("Chardie")
+  tagline     String   @default("Computer Science Senior & Frontend Developer | Building user-centric web applications, and digital solutions that bridge the gap between Design, and Technical logic.")
+  currentRole String   @default("Frontend Developer")
+  roleFocus   String   @default("Focused on Next.js & React")
+  updatedAt   DateTime @updatedAt
+}
