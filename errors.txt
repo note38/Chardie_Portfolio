@@ -1,0 +1,2 @@
+﻿app/api/blogs/[id]/route.ts(21,47): error TS2353: Object literal may only specify known properties, and 'url' does not exist in type '(Without<BlogUpdateInput, BlogUncheckedUpdateInput> & BlogUncheckedUpdateInput) | (Without<...> & BlogUpdateInput)'.
+app/api/blogs/route.ts(31,47): error TS2353: Object literal may only specify known properties, and 'url' does not exist in type '(Without<BlogCreateInput, BlogUncheckedCreateInput> & BlogUncheckedCreateInput) | (Without<...> & BlogCreateInput)'.
