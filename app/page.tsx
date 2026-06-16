@@ -2,7 +2,6 @@
 
 import { useEffect, useRef, useState } from "react";
 import AboutMe from "../components/AboutMe";
-import Blogs from "../components/Blogs";
 import Connect from "../components/Connect";
 import Project from "../components/Project";
 import Navigation from "../components/Navigation";
@@ -46,14 +45,6 @@ export default function Home() {
           className="opacity-0"
         >
           <Project />
-        </section>
-
-        <section
-          id="blog"
-          ref={(el) => { sectionsRef.current[2] = el; }}
-          className="opacity-0"
-        >
-          <Blogs />
         </section>
 
         <section

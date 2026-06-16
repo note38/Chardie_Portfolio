@@ -3,7 +3,6 @@
 import { useState, useEffect } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { UserButton, useAuth } from "@clerk/nextjs";
 import { Moon, Sun, Menu, X } from "lucide-react";
 import { useTheme } from "next-themes";
 
@@ -11,7 +10,6 @@ export default function Navigation({ activeSection }: { activeSection?: string }
   const [isOpen, setIsOpen] = useState(false);
   const [mounted, setMounted] = useState(false);
   const { theme, setTheme } = useTheme();
-  const { isSignedIn } = useAuth();
   const pathname = usePathname();
 
   useEffect(() => setMounted(true), []);
@@ -19,11 +17,10 @@ export default function Navigation({ activeSection }: { activeSection?: string }
   const navLinks = [
     { name: "About", href: "#intro" },
     { name: "Projects", href: "#project" },
-    { name: "Blog", href: "#blog" },
     { name: "Connect", href: "#connect" },
   ];
 
-  if (pathname.startsWith("/dashboard") || pathname.startsWith("/sign-in")) {
+  if (pathname.startsWith("/dashboard")) {
     return null;
   }
 
@@ -58,17 +55,8 @@ export default function Navigation({ activeSection }: { activeSection?: string }
                 {theme === "dark" ? <Sun size={18} /> : <Moon size={18} />}
               </button>
             )}
-            {isSignedIn && (
-              <>
-                <Link
-                  href="/dashboard"
-                  className="text-sm font-medium hover:underline"
-                >
-                  Dashboard
-                </Link>
-                <UserButton />
-              </>
-            )}
+            <>
+            </>
           </div>
         </div>
 
@@ -109,17 +97,6 @@ export default function Navigation({ activeSection }: { activeSection?: string }
                 {link.name}
               </Link>
             ))}
-            {isSignedIn && (
-              <div className="pt-4 border-t border-border flex flex-col gap-4">
-                <Link
-                  href="/dashboard"
-                  onClick={() => setIsOpen(false)}
-                  className="text-lg font-medium"
-                >
-                  Dashboard
-                </Link>
-              </div>
-            )}
           </div>
         </div>
       )}

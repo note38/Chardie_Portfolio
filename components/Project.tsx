@@ -15,19 +15,57 @@ interface Project {
 const DEFAULT_PROJECTS: Project[] = [
   {
     id: "1",
-    title: "Eco-Track App",
-    description: "Sustainability tracking app with real-time carbon footprint calculation.",
-    techStack: "Next.js, Tailwind, Prisma",
-    githubUrl: "#",
-    url: "#",
+    title: "DWU-P-AEVS",
+    description: "Development of Wesleyan University-Philippines Aurora Enchanced Voting System, a secure and user-friendly online voting platform.",
+    techStack: "Next.js, Clerk, Tailwind, Prisma",
+    githubUrl: "https://github.com/note38/DWU-P-AEVS",
+    url: "https://www.awup-evs.site/",
   },
   {
     id: "2",
-    title: "Flux Design System",
-    description: "Multi-product design system with accessible React components.",
-    techStack: "React, TypeScript, Radix",
-    githubUrl: "#",
+    title: "js-background-generator",
+    description: "A tool that generates dynamic backgrounds using JavaScript, allowing users to create visually appealing designs for websites and applications.",
+    techStack: "HTML, CSS, JavaScript",
+    githubUrl: "https://github.com/note38/js-background-generator",
   },
+  {
+    id: "3",
+    title: "Flexbox",
+    description: "A CSS layout module that provides an efficient way to arrange and align items within a container, allowing for responsive and flexible designs.",
+    techStack: "HTML, CSS",
+    githubUrl: "https://github.com/note38/flexbox",
+  },
+  {
+    id: "4",
+    title: "ToDos",
+    description: "A simple and intuitive task management application that helps users organize their daily tasks and stay productive.",
+    techStack: "HTML, CSS, JavaScript",
+    githubUrl: "https://github.com/note38/ToDos",
+  },
+    {
+    id: "5",
+    title: "Jewel-kate",
+    description: "18th birthday invitation website",
+    techStack: "HTML, CSS, JavaScript",
+    githubUrl: "https://github.com/note38/Jewel-kate",
+  },
+  {
+    id: "6",
+    title: "Jewel Kate",
+    description: "18th birthday invitation website",
+    techStack: "HTML, CSS, JavaScript",
+    githubUrl: "https://github.com/note38/Jewel-kate",
+    url: "https://note38.github.io/Jewel-kate/"
+  },
+    {
+    id: "7",
+    title: "Jewel Kate Capture the magic",
+    description: "18th birthday Capture the magic website, upload photos, and relive the moments.",
+    techStack: "HTML, CSS, JavaScript",
+    githubUrl: "https://github.com/note38/Jewel-kate",
+    url: "https://note38.github.io/Jewel-kate/"
+  },
+
 ];
 
 export default forwardRef<HTMLElement, {}>(function Project({}, ref) {

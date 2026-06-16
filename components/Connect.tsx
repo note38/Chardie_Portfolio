@@ -13,8 +13,8 @@ export default function Connect() {
       .catch(() => {});
   }, []);
 
-  const github = profile.github || "felixmacaspac";
-  const linkedin = profile.linkedin || "felixmacaspac";
+  const github = profile.github || "note38";
+  const linkedin = profile.linkedin || "chardie-gotis-3455a1314";
 
   const githubUrl = github.startsWith("http") ? github : `https://github.com/${github}`;
   const linkedinUrl = linkedin.startsWith("http") ? linkedin : `https://linkedin.com/in/${linkedin}`;
@@ -41,10 +41,10 @@ export default function Connect() {
             {profile.bio || "Always interested in new opportunities and collaborations."}
           </p>
           <Link
-            href={`mailto:${profile.email || "test@example.com"}`}
+            href={`mailto:${profile.email || "chardiegotis2003@gmail.com"}`}
             className="group flex items-center gap-3 text-foreground font-medium"
           >
-            {profile.email || "test@example.com"}{" "}
+            {profile.email || "chardiegotis2003@gmail.com"}{" "}
             <span className="group-hover:translate-x-1 transition-transform">
               →
             </span>

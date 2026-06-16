@@ -25,6 +25,9 @@ const DEFAULT_SKILLS = [
   "Node.js",
   "Next.js",
   "Prisma",
+  "Git",
+  "n8n",
+  "OpenClaw"
 ];
 
 const DEFAULT_PROFILE: Profile = {
@@ -32,7 +35,7 @@ const DEFAULT_PROFILE: Profile = {
   surname: "Chardie",
   tagline:
     "Computer Science Senior & Frontend Developer | Building user-centric web applications, and digital solutions that bridge the gap between Design, and Technical logic.",
-  currentRole: "Frontend Developer",
+  currentRole: "Frontend Developer / AI Automation" ,
   roleFocus: "Focused on Next.js & React",
 };
 
