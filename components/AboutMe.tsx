@@ -158,6 +158,7 @@ export default forwardRef<HTMLDivElement, {}>(function AboutMe({}, ref) {
                 fill
                 className="object-contain"
                 priority
+                unoptimized
               />
             )}
           </div>

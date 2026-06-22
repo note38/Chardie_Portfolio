@@ -129,6 +129,7 @@ export default forwardRef<HTMLElement, {}>(function Project({}, ref) {
                       alt={project.title}
                       fill
                       className="object-cover group-hover:scale-105 transition-transform duration-700"
+                      unoptimized
                     />
                   ) : (
                     <div className="absolute inset-0 flex flex-col items-center justify-center gap-3">
