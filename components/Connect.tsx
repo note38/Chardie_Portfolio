@@ -7,10 +7,7 @@ export default function Connect() {
   const [profile, setProfile] = useState<{ email?: string; github?: string; linkedin?: string; bio?: string }>({});
 
   useEffect(() => {
-    fetch("/api/profile")
-      .then((res) => res.json())
-      .then((data) => setProfile(data))
-      .catch(() => {});
+    // API endpoint removed to prevent 404s
   }, []);
 
   const github = profile.github || "note38";

@@ -81,18 +81,7 @@ const DEFAULT_PROJECTS: Project[] = [
 ];
 
 export default forwardRef<HTMLElement, {}>(function Project({}, ref) {
-  const [projects, setProjects] = useState<Project[]>([]);
-
-  useEffect(() => {
-    fetch("/api/projects")
-      .then((res) => res.json())
-      .then((data) => {
-        if (Array.isArray(data) && data.length > 0) {
-          setProjects(data);
-        }
-      })
-      .catch(() => {});
-  }, []);
+  const [projects, setProjects] = useState<Project[]>(DEFAULT_PROJECTS);
 
   const displayProjects = projects.length > 0 ? projects : DEFAULT_PROJECTS;
 

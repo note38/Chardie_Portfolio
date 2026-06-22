@@ -42,34 +42,13 @@ const DEFAULT_PROFILE: Profile = {
 };
 
 export default forwardRef<HTMLDivElement, {}>(function AboutMe({}, ref) {
-  const [skills, setSkills] = useState<Skill[]>([]);
+  const [skills, setSkills] = useState<Skill[]>(DEFAULT_SKILLS.map((s, i) => ({ id: i.toString(), name: s })));
   const [profile, setProfile] = useState<Profile>(DEFAULT_PROFILE);
   const [mounted, setMounted] = useState(false);
   const { resolvedTheme } = useTheme();
 
   useEffect(() => {
     setMounted(true);
-    fetch("/api/skills")
-      .then((res) => res.json())
-      .then((data) => {
-        if (Array.isArray(data) && data.length > 0) {
-          setSkills(data);
-        }
-      })
-      .catch(() => {});
-
-    fetch("/api/profile")
-      .then((res) => res.json())
-      .then((data) => {
-        setProfile({
-          name: data.name || DEFAULT_PROFILE.name,
-          surname: data.surname || DEFAULT_PROFILE.surname,
-          tagline: data.tagline || DEFAULT_PROFILE.tagline,
-          currentRole: data.currentRole || DEFAULT_PROFILE.currentRole,
-          roleFocus: data.roleFocus || DEFAULT_PROFILE.roleFocus,
-        });
-      })
-      .catch(() => {});
   }, []);
 
   const displaySkills = skills.length > 0 ? skills.map((s) => s.name) : DEFAULT_SKILLS;
