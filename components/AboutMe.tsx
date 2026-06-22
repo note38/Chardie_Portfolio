@@ -1,6 +1,8 @@
 "use client";
 
 import { useEffect, useState, forwardRef } from "react";
+import Image from "next/image";
+import { useTheme } from "next-themes";
 
 interface Skill {
   id: string;
@@ -42,8 +44,11 @@ const DEFAULT_PROFILE: Profile = {
 export default forwardRef<HTMLDivElement, {}>(function AboutMe({}, ref) {
   const [skills, setSkills] = useState<Skill[]>([]);
   const [profile, setProfile] = useState<Profile>(DEFAULT_PROFILE);
+  const [mounted, setMounted] = useState(false);
+  const { resolvedTheme } = useTheme();
 
   useEffect(() => {
+    setMounted(true);
     fetch("/api/skills")
       .then((res) => res.json())
       .then((data) => {
@@ -113,11 +118,11 @@ export default forwardRef<HTMLDivElement, {}>(function AboutMe({}, ref) {
   return (
     <header
       id="intro"
-      className="min-h-screen flex items-center "
+      className="min-h-screen flex flex-col justify-center pt-24 pb-12 w-full"
       ref={ref as React.Ref<HTMLDivElement>}
     >
-      <div className="grid lg:grid-cols-5 gap-12 sm:gap-16 w-full">
-        <div className="lg:col-span-3 space-y-6 sm:space-y-8">
+      <div className="grid lg:grid-cols-5 gap-12 sm:gap-16 w-full flex-grow content-center">
+        <div className="lg:col-span-3 space-y-6 sm:space-y-8 flex flex-col justify-center">
           <div className="space-y-3 sm:space-y-2">
             <div className="text-sm text-muted-foreground font-mono tracking-wider">
               PORTFOLIO / 2026
@@ -144,31 +149,46 @@ export default forwardRef<HTMLDivElement, {}>(function AboutMe({}, ref) {
           </div>
         </div>
 
-        <div className="lg:col-span-2 flex flex-col justify-end space-y-6 sm:space-y-8 mt-8 lg:mt-0">
-          <div className="space-y-4">
-            <div className="text-sm text-muted-foreground font-mono uppercase tracking-widest">
-              Currently
-            </div>
-            <div className="space-y-2">
-              <div className="text-foreground font-medium">{profile.currentRole}</div>
-              <div className="text-xs text-muted-foreground">{profile.roleFocus}</div>
-            </div>
+        <div className="lg:col-span-2 flex flex-col justify-center items-center lg:items-end mt-12 lg:mt-0">
+          <div className="relative w-64 h-64 sm:w-80 sm:h-80 lg:w-96 lg:h-96 drop-shadow-2xl animate-fade-in-up hover:scale-105 transition-transform duration-500 ease-out">
+            {mounted && (
+              <Image
+                src={resolvedTheme === 'dark' ? "/chardie_Darkmode.png" : "/chardie_lightmode.png"}
+                alt="Profile Picture"
+                fill
+                className="object-contain"
+                priority
+              />
+            )}
           </div>
+        </div>
+      </div>
 
-          <div className="space-y-4">
-            <div className="text-sm text-muted-foreground font-mono uppercase tracking-widest">
-              Skills
-            </div>
-            <div className="flex flex-wrap gap-2">
-              {displaySkills.map((skill) => (
-                <span
-                  key={skill}
-                  className="px-4 py-2 text-xs border border-border rounded-full hover:border-foreground/40 hover:bg-muted/50 transition-all duration-300 cursor-default"
-                >
-                  {skill}
-                </span>
-              ))}
-            </div>
+      {/* Footer: Currently & Skills */}
+      <div className="w-full mt-16 pt-8 border-t border-border/40 grid sm:grid-cols-2 gap-8">
+        <div className="space-y-4">
+          <div className="text-sm text-muted-foreground font-mono uppercase tracking-widest">
+            Currently
+          </div>
+          <div className="space-y-2">
+            <div className="text-foreground font-medium">{profile.currentRole}</div>
+            <div className="text-xs text-muted-foreground">{profile.roleFocus}</div>
+          </div>
+        </div>
+
+        <div className="space-y-4">
+          <div className="text-sm text-muted-foreground font-mono uppercase tracking-widest">
+            Skills
+          </div>
+          <div className="flex flex-wrap gap-2">
+            {displaySkills.map((skill) => (
+              <span
+                key={skill}
+                className="px-3 py-1.5 text-xs border border-border rounded-full hover:border-foreground/40 hover:bg-muted/50 transition-all duration-300 cursor-default"
+              >
+                {skill}
+              </span>
+            ))}
           </div>
         </div>
       </div>

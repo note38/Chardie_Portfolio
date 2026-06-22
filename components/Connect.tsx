@@ -14,7 +14,7 @@ export default function Connect() {
   }, []);
 
   const github = profile.github || "note38";
-  const linkedin = profile.linkedin || "chardie-gotis-3455a1314";
+  const linkedin = profile.linkedin || "chardie-gotis";
 
   const githubUrl = github.startsWith("http") ? github : `https://github.com/${github}`;
   const linkedinUrl = linkedin.startsWith("http") ? linkedin : `https://linkedin.com/in/${linkedin}`;
