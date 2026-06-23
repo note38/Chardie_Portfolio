@@ -77,7 +77,7 @@ const DEFAULT_PROJECTS: Project[] = [
     githubUrl: "https://github.com/note38/Jewel-kate",
   },
   {
-    id: "7",
+    id: "8",
     title: "Jewel Kate Capture the magic",
     description: "18th birthday Capture the magic website, upload photos, and relive the moments.",
     techStack: "HTML, CSS, JavaScript",
@@ -85,6 +85,102 @@ const DEFAULT_PROJECTS: Project[] = [
     url: "https://note38.github.io/Jewel-kate/",
   },
 ];
+
+const ProjectCard = ({ project, index }: { project: Project; index: number }) => {
+  const [isExpanded, setIsExpanded] = useState(false);
+  const gradient = CARD_GRADIENTS[index % CARD_GRADIENTS.length];
+  const initials = project.title
+    .split(/[\s\-_]+/)
+    .map((w) => w[0])
+    .join("")
+    .toUpperCase()
+    .slice(0, 3);
+
+  const isLongDescription = project.description.length > 80;
+
+  return (
+    <div className="group relative border border-border rounded-2xl hover:border-foreground/30 transition-all duration-500 overflow-hidden flex flex-col">
+      {/* Thumbnail */}
+      <div className={`relative w-full h-44 bg-gradient-to-br ${gradient} overflow-hidden`}>
+        {project.imageUrl ? (
+          <Image
+            src={project.imageUrl}
+            alt={project.title}
+            fill
+            className="object-cover group-hover:scale-105 transition-transform duration-700"
+            unoptimized
+          />
+        ) : (
+          <div className="absolute inset-0 flex flex-col items-center justify-center gap-3">
+            <span className="text-4xl font-bold tracking-tight text-foreground/20 select-none">
+              {initials}
+            </span>
+            <div className="flex gap-1.5">
+              {project.techStack.split(",").slice(0, 3).map((tech) => (
+                <span
+                  key={tech}
+                  className="px-2 py-0.5 text-[10px] rounded-full bg-background/40 text-foreground/60 font-mono backdrop-blur-sm border border-border/50"
+                >
+                  {tech.trim()}
+                </span>
+              ))}
+            </div>
+          </div>
+        )}
+        {/* Links overlay */}
+        <div className="absolute top-3 right-3 flex gap-2 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+          {project.githubUrl && (
+            <a
+              href={project.githubUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="p-2 rounded-full bg-background/80 backdrop-blur-sm text-muted-foreground hover:text-foreground border border-border/50 transition-colors"
+            >
+              <Github size={16} />
+            </a>
+          )}
+          {project.url && (
+            <a
+              href={project.url}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="p-2 rounded-full bg-background/80 backdrop-blur-sm text-muted-foreground hover:text-foreground border border-border/50 transition-colors"
+            >
+              <ExternalLink size={16} />
+            </a>
+          )}
+        </div>
+      </div>
+
+      {/* Card content */}
+      <div className="p-6 space-y-3 flex-1 flex flex-col hover:bg-muted/20 transition-colors duration-500">
+        <h3 className="text-lg font-semibold tracking-tight group-hover:text-foreground">
+          {project.title}
+        </h3>
+        
+        <div className="flex-1 space-y-1">
+          <p className={`text-sm text-muted-foreground leading-relaxed transition-all duration-300 ${isExpanded ? "" : "line-clamp-2"}`}>
+            {project.description}
+          </p>
+          {isLongDescription && (
+            <button
+              onClick={() => setIsExpanded(!isExpanded)}
+              className="text-xs font-medium text-foreground/60 hover:text-foreground transition-colors underline decoration-border underline-offset-4"
+            >
+              {isExpanded ? "See less" : "See more"}
+            </button>
+          )}
+        </div>
+
+        <div className="pt-3 border-t border-border mt-auto">
+          <span className="text-xs font-mono text-muted-foreground uppercase tracking-widest">
+            {project.techStack}
+          </span>
+        </div>
+      </div>
+    </div>
+  );
+};
 
 export default forwardRef<HTMLElement, {}>(function Project({}, ref) {
   const [projects, setProjects] = useState<Project[]>(DEFAULT_PROJECTS);
@@ -102,89 +198,9 @@ export default forwardRef<HTMLElement, {}>(function Project({}, ref) {
         </div>
 
         <div className="grid gap-6 md:grid-cols-2">
-          {displayProjects.map((project, index) => {
-            const gradient = CARD_GRADIENTS[index % CARD_GRADIENTS.length];
-            const initials = project.title
-              .split(/[\s\-_]+/)
-              .map((w) => w[0])
-              .join("")
-              .toUpperCase()
-              .slice(0, 3);
-
-            return (
-              <div
-                key={project.id}
-                className="group relative border border-border rounded-2xl hover:border-foreground/30 transition-all duration-500 overflow-hidden flex flex-col"
-              >
-                {/* Thumbnail */}
-                <div className={`relative w-full h-44 bg-gradient-to-br ${gradient} overflow-hidden`}>
-                  {project.imageUrl ? (
-                    <Image
-                      src={project.imageUrl}
-                      alt={project.title}
-                      fill
-                      className="object-cover group-hover:scale-105 transition-transform duration-700"
-                      unoptimized
-                    />
-                  ) : (
-                    <div className="absolute inset-0 flex flex-col items-center justify-center gap-3">
-                      <span className="text-4xl font-bold tracking-tight text-foreground/20 select-none">
-                        {initials}
-                      </span>
-                      <div className="flex gap-1.5">
-                        {project.techStack.split(",").slice(0, 3).map((tech) => (
-                          <span
-                            key={tech}
-                            className="px-2 py-0.5 text-[10px] rounded-full bg-background/40 text-foreground/60 font-mono backdrop-blur-sm border border-border/50"
-                          >
-                            {tech.trim()}
-                          </span>
-                        ))}
-                      </div>
-                    </div>
-                  )}
-                  {/* Links overlay */}
-                  <div className="absolute top-3 right-3 flex gap-2 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                    {project.githubUrl && (
-                      <a
-                        href={project.githubUrl}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="p-2 rounded-full bg-background/80 backdrop-blur-sm text-muted-foreground hover:text-foreground border border-border/50 transition-colors"
-                      >
-                        <Github size={16} />
-                      </a>
-                    )}
-                    {project.url && (
-                      <a
-                        href={project.url}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="p-2 rounded-full bg-background/80 backdrop-blur-sm text-muted-foreground hover:text-foreground border border-border/50 transition-colors"
-                      >
-                        <ExternalLink size={16} />
-                      </a>
-                    )}
-                  </div>
-                </div>
-
-                {/* Card content */}
-                <div className="p-6 space-y-3 flex-1 flex flex-col hover:bg-muted/20 transition-colors duration-500">
-                  <h3 className="text-lg font-semibold tracking-tight group-hover:text-foreground">
-                    {project.title}
-                  </h3>
-                  <p className="text-sm text-muted-foreground leading-relaxed line-clamp-2 flex-1">
-                    {project.description}
-                  </p>
-                  <div className="pt-3 border-t border-border mt-auto">
-                    <span className="text-xs font-mono text-muted-foreground uppercase tracking-widest">
-                      {project.techStack}
-                    </span>
-                  </div>
-                </div>
-              </div>
-            );
-          })}
+          {displayProjects.map((project, index) => (
+            <ProjectCard key={project.id} project={project} index={index} />
+          ))}
         </div>
       </div>
     </section>
