@@ -34,13 +34,14 @@ const DEFAULT_PROJECTS: Project[] = [
     githubUrl: "https://github.com/note38/DWU-P-AEVS",
     url: "https://www.awup-evs.site/",
   },
-  // {
-  //   id: "2",
-  //   title: "js-background-generator",
-  //   description: "A tool that generates dynamic backgrounds using JavaScript, allowing users to create visually appealing designs for websites and applications.",
-  //   techStack: "HTML, CSS, JavaScript",
-  //   githubUrl: "https://github.com/note38/js-background-generator",
-  // },
+  {
+    id: "2",
+    title: "Sha-bee",
+    description: "A E-commerce website that allows users to browse and purchase a wide range of products, with features such as product search, shopping cart, and secure checkout.",
+    techStack: "Next.js, Clerk, Tailwind, Sanity.io",
+    githubUrl: "https://github.com/note38/Sha-bee",
+    url: "https://sha-bee.netlify.app/",
+  },
   // // {
   //   id: "3",
   //   title: "Flexbox",
@@ -97,9 +98,27 @@ const ProjectCard = ({ project, index }: { project: Project; index: number }) =>
     .slice(0, 3);
 
   const isLongDescription = project.description.length > 80;
+  const targetUrl = project.url || project.githubUrl || "#";
+
+  const handleCardClick = () => {
+    if (targetUrl && targetUrl !== "#") {
+      window.open(targetUrl, "_blank", "noopener,noreferrer");
+    }
+  };
 
   return (
-    <div className="group relative border border-border rounded-2xl hover:border-foreground/30 transition-all duration-500 overflow-hidden flex flex-col">
+    <div
+      className="group relative border border-border rounded-2xl hover:border-foreground/30 transition-all duration-500 overflow-hidden flex flex-col cursor-pointer"
+      onClick={handleCardClick}
+      role="button"
+      tabIndex={0}
+      onKeyDown={(event) => {
+        if (event.key === "Enter" || event.key === " ") {
+          event.preventDefault();
+          handleCardClick();
+        }
+      }}
+    >
       {/* Thumbnail */}
       <div className={`relative w-full h-44 bg-gradient-to-br ${gradient} overflow-hidden`}>
         {project.imageUrl ? (
@@ -128,12 +147,13 @@ const ProjectCard = ({ project, index }: { project: Project; index: number }) =>
           </div>
         )}
         {/* Links overlay */}
-        <div className="absolute top-3 right-3 flex gap-2 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+        <div className="absolute top-3 right-3 flex gap-2">
           {project.githubUrl && (
             <a
               href={project.githubUrl}
               target="_blank"
               rel="noopener noreferrer"
+              onClick={(event) => event.stopPropagation()}
               className="p-2 rounded-full bg-background/80 backdrop-blur-sm text-muted-foreground hover:text-foreground border border-border/50 transition-colors"
             >
               <Github size={16} />
@@ -144,6 +164,7 @@ const ProjectCard = ({ project, index }: { project: Project; index: number }) =>
               href={project.url}
               target="_blank"
               rel="noopener noreferrer"
+              onClick={(event) => event.stopPropagation()}
               className="p-2 rounded-full bg-background/80 backdrop-blur-sm text-muted-foreground hover:text-foreground border border-border/50 transition-colors"
             >
               <ExternalLink size={16} />
@@ -172,10 +193,15 @@ const ProjectCard = ({ project, index }: { project: Project; index: number }) =>
           )}
         </div>
 
-        <div className="pt-3 border-t border-border mt-auto">
-          <span className="text-xs font-mono text-muted-foreground uppercase tracking-widest">
-            {project.techStack}
-          </span>
+        <div className="pt-3 border-t border-border mt-auto space-y-2">
+          <div className="flex items-center justify-between gap-2">
+            <span className="text-xs font-mono text-muted-foreground uppercase tracking-widest">
+              {project.techStack}
+            </span>
+            <span className="text-xs font-medium text-foreground/70">
+              {project.url ? "Open project" : project.githubUrl ? "View code" : "Open"}
+            </span>
+          </div>
         </div>
       </div>
     </div>

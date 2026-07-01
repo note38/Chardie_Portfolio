@@ -100,8 +100,8 @@ export default forwardRef<HTMLDivElement, {}>(function AboutMe({}, ref) {
       className="min-h-screen flex flex-col justify-center pt-24 pb-12 w-full"
       ref={ref as React.Ref<HTMLDivElement>}
     >
-      <div className="grid lg:grid-cols-5 gap-12 sm:gap-16 w-full flex-grow content-center">
-        <div className="lg:col-span-3 space-y-6 sm:space-y-8 flex flex-col justify-center">
+      <div className="grid gap-10 sm:gap-12 lg:grid-cols-[1.15fr_0.85fr] items-center w-full flex-grow content-center">
+        <div className="order-2 lg:order-1 space-y-6 sm:space-y-8 flex flex-col justify-center">
           <div className="space-y-3 sm:space-y-2">
             <div className="text-sm text-muted-foreground font-mono tracking-wider">
               PORTFOLIO / 2026
@@ -128,8 +128,8 @@ export default forwardRef<HTMLDivElement, {}>(function AboutMe({}, ref) {
           </div>
         </div>
 
-        <div className="lg:col-span-2 flex flex-col justify-center items-center lg:items-end mt-12 lg:mt-0">
-          <div className="relative w-64 h-64 sm:w-80 sm:h-80 lg:w-96 lg:h-96 drop-shadow-2xl animate-fade-in-up hover:scale-105 transition-transform duration-500 ease-out">
+        <div className="order-1 lg:order-2 flex justify-center lg:justify-end">
+          <div className="relative w-56 h-56 sm:w-72 sm:h-72 lg:w-96 lg:h-96 drop-shadow-2xl animate-fade-in-up hover:scale-105 transition-transform duration-500 ease-out">
             {mounted && (
               <Image
                 src={resolvedTheme === 'dark' ? "/chardie_Darkmode.png" : "/chardie_lightmode.png"}
