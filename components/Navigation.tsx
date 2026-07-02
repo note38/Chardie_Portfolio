@@ -5,6 +5,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { Moon, Sun, Menu, X } from "lucide-react";
 import { useTheme } from "next-themes";
+import { FlipFadeText } from "@/components/ui/flip-fade-text"
 
 export default function Navigation({ activeSection }: { activeSection?: string }) {
   const [isOpen, setIsOpen] = useState(false);
@@ -27,9 +28,14 @@ export default function Navigation({ activeSection }: { activeSection?: string }
   return (
     <nav className="fixed top-0 w-full z-50 bg-background/80 backdrop-blur-md border-b border-border">
       <div className="max-w-4xl mx-auto px-6 h-16 flex items-center justify-between">
-        <Link href="/" className="text-xl font-light tracking-tighter">
+    
+        <FlipFadeText
+           words={["CHARDIE", "GOTIS"]}
+           className="text-lg tracking-tighter"
+          />
+        {/* <Link href="/" className="text-xl font-light tracking-tighter">
           GOTIS<span className="text-muted-foreground">CHARDIE</span>
-        </Link>
+        </Link> */}
 
         {/* Desktop Nav */}
         <div className="hidden md:flex items-center gap-8">

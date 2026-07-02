@@ -3,6 +3,7 @@
 import { useEffect, useState, forwardRef } from "react";
 import Image from "next/image";
 import { useTheme } from "next-themes";
+import { AsciiGlitchRipple } from "@/components/ui/ascii-glitch-ripple"
 
 interface Skill {
   id: string;
@@ -100,8 +101,8 @@ export default forwardRef<HTMLDivElement, {}>(function AboutMe({}, ref) {
       className="min-h-screen flex flex-col justify-center pt-24 pb-12 w-full"
       ref={ref as React.Ref<HTMLDivElement>}
     >
-      <div className="grid gap-10 sm:gap-12 lg:grid-cols-[1.15fr_0.85fr] items-center w-full flex-grow content-center">
-        <div className="order-2 lg:order-1 space-y-6 sm:space-y-8 flex flex-col justify-center">
+      <div className="grid gap-10 sm:gap-12 md:grid-cols-[1fr_0.7fr] lg:grid-cols-[1.15fr_0.85fr] items-center w-full flex-grow content-center">
+      <div className="order-1 space-y-6 sm:space-y-8 flex flex-col justify-center">
           <div className="space-y-3 sm:space-y-2">
             <div className="text-sm text-muted-foreground font-mono tracking-wider">
               PORTFOLIO / 2026
@@ -128,7 +129,7 @@ export default forwardRef<HTMLDivElement, {}>(function AboutMe({}, ref) {
           </div>
         </div>
 
-        <div className="order-1 lg:order-2 flex justify-center lg:justify-end">
+       <div className="order-2 flex justify-center lg:justify-end">
           <div className="relative w-56 h-56 sm:w-72 sm:h-72 lg:w-96 lg:h-96 drop-shadow-2xl animate-fade-in-up hover:scale-105 transition-transform duration-500 ease-out">
             {mounted && (
               <Image
@@ -150,9 +151,26 @@ export default forwardRef<HTMLDivElement, {}>(function AboutMe({}, ref) {
           <div className="text-sm text-muted-foreground font-mono uppercase tracking-widest">
             Currently
           </div>
-          <div className="space-y-2">
-            <div className="text-foreground font-medium">{profile.currentRole}</div>
-            <div className="text-xs text-muted-foreground">{profile.roleFocus}</div>
+          <div className="space-y-2 sm:flex-row sm:items-center gap-2  text-sm text-muted-foreground">
+              <AsciiGlitchRipple
+                as="a"
+                href="#"
+                dur={1000}
+                spread={1.2}
+                className="text-lg font-mono font-medium text-foreground mr-4"
+              >
+                {profile.currentRole || "Developer"}
+              </AsciiGlitchRipple>
+                
+              <AsciiGlitchRipple
+                as="a"
+                href="#"
+                dur={1000}
+                spread={1.2}
+                className="text-xs text-muted-foreground font-mono font-medium text-foreground "
+              >
+                {profile.roleFocus || "Focus"}
+              </AsciiGlitchRipple>
           </div>
         </div>
 
