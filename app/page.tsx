@@ -45,7 +45,7 @@ export default function Home() {
     return () => observer.disconnect();
   }, [isLoading]); 
 
-  // 3. Render the loader while waiting
+  
   if (isLoading) {
     return (
       <div className="min-h-screen bg-background flex flex-col items-center justify-center">
@@ -54,12 +54,14 @@ export default function Home() {
     );
   }
 
-  // 4. Render the main portfolio layout
+
   return (
     <div className="min-h-screen bg-background text-foreground relative animate-in fade-in duration-700">
       <Navigation activeSection={activeSection} />
 
-      <main className="max-w-4xl mx-auto px-6 sm:px-8 lg:px-16 pt-20">
+      <main className=" px-6 sm:px-8 lg:px-16 pt-20">
+      <div className="max-w-4xl mx-auto">
+       
         <section id="intro" ref={(el) => { sectionsRef.current[0] = el; }}>
           <AboutMe />
         </section>
@@ -67,10 +69,12 @@ export default function Home() {
         <section
           id="project"
           ref={(el) => { sectionsRef.current[1] = el; }}
-          className="opacity-0"
+          className="opacity-0 "
         >
           <Project />
         </section>
+
+      </div>
 
         <section
           id="connect"
@@ -85,6 +89,7 @@ export default function Home() {
             © 2026 Chardie Gotis
           </div>
         </footer>
+        
       </main>
     </div>
   );

@@ -72,18 +72,19 @@ const DEFAULT_PROJECTS: Project[] = [
   },
   {
     id: "5",
-    title: "Jewel-kate",
+    title: "Jewel-kate Invitation",
     description: "18th birthday invitation website",
     techStack: "HTML, CSS, JavaScript",
     githubUrl: "https://github.com/note38/Jewel-kate",
+    url: "https://note38.github.io/Jewel-kate/",
   },
   {
     id: "8",
     title: "Jewel Kate Capture the magic",
     description: "18th birthday Capture the magic website, upload photos, and relive the moments.",
     techStack: "HTML, CSS, JavaScript",
-    githubUrl: "https://github.com/note38/Jewel-kate",
-    url: "https://note38.github.io/Jewel-kate/",
+    githubUrl: "https://github.com/note38/Capture-the-magic",
+    url: "https://note38.github.io/Capture-the-magic/",
   },
 ];
 

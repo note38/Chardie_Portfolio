@@ -152,7 +152,7 @@ export function StaggeredGrid({
 
     return (
         <div
-            className={cn("shadow relative overflow-hidden w-full", className)}
+            className={cn("shadow relative overflow-hidden w-full ", className)}
             style={{ '--grid-item-translate': '0px' } as React.CSSProperties}
         >
             <section className="grid place-items-center w-full relative mt-[10vh]">
